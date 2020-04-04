@@ -1,24 +1,23 @@
 export default function renderScreen(screen, game, requestAnimationFrame, currentPlayerId) {
     const context = screen.getContext('2d')
-    context.fillStyle = 'white'
-    context.clearRect(0, 0, 10, 10)
+    context.fillStyle = 'black'
+    context.clearRect(0, 0, 50000, 50000)
 
     for (const playerId in game.state.players) {
         const player = game.state.players[playerId]
-        context.fillStyle = 'black'
-        context.fillRect(player.x, player.y, 1, 1)
+        context.fillStyle = player.color
+        context.fillRect(player.x-10, player.y-10, 20, 20)
     }
 
-    for (const fruitId in game.state.fruits) {
-        const fruit = game.state.fruits[fruitId]
-        context.fillStyle = 'green'
-        context.fillRect(fruit.x, fruit.y, 1, 1)
+    for (let pointId in game.state.points) {
+        const point = game.state.points[pointId]
+        context.fillStyle = point.color
+        context.fillRect(point.x-10, point.y-10, 20, 20)
     }
-
     const currentPlayer = game.state.players[currentPlayerId]
 
     if(currentPlayer) {
-        context.fillStyle = '#F0DB4F'
+        context.fillStyle = currentPlayer.color
         context.fillRect(currentPlayer.x, currentPlayer.y, 1, 1)
     }
 
